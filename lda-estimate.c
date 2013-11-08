@@ -117,14 +117,14 @@ void run_em(char* start, char* directory, corpus* corpus)
 
     // allocate variational parameters
 
-    var_gamma = malloc(sizeof(double*)*(corpus->num_docs));
+    var_gamma = new double*[corpus->num_docs];
     for (d = 0; d < corpus->num_docs; d++)
-	var_gamma[d] = malloc(sizeof(double) * NTOPICS);
+	var_gamma[d] = new double[NTOPICS];
 
     int max_length = max_corpus_length(corpus);
-    phi = malloc(sizeof(double*)*max_length);
+    phi = new double*[max_length];
     for (n = 0; n < max_length; n++)
-	phi[n] = malloc(sizeof(double) * NTOPICS);
+	phi[n] = new double[NTOPICS];
 
     // initialize model
 
@@ -268,9 +268,9 @@ void infer(char* model_root, char* save, corpus* corpus)
     document* doc;
 
     model = load_lda_model(model_root);
-    var_gamma = malloc(sizeof(double*)*(corpus->num_docs));
+    var_gamma = new double* [corpus->num_docs];
     for (i = 0; i < corpus->num_docs; i++)
-	var_gamma[i] = malloc(sizeof(double)*model->num_topics);
+	var_gamma[i] = new double[model->num_topics];
     sprintf(filename, "%s-lda-lhood.dat", save);
     fileptr = fopen(filename, "w");
     for (d = 0; d < corpus->num_docs; d++)

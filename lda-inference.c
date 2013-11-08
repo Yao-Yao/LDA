@@ -24,6 +24,9 @@
  *
  */
 
+float VAR_CONVERGED = 0;
+int VAR_MAX_ITER = 0;
+
 double lda_inference(document* doc, lda_model* model, double* var_gamma, double** phi)
 {
     double converged = 1;
@@ -90,8 +93,7 @@ double lda_inference(document* doc, lda_model* model, double* var_gamma, double*
  *
  */
 
-double
-compute_likelihood(document* doc, lda_model* model, double** phi, double* var_gamma)
+double compute_likelihood(document* doc, lda_model* model, double** phi, double* var_gamma)
 {
     double likelihood = 0, digsum = 0, var_gamma_sum = 0, dig[model->num_topics];
     int k, n;

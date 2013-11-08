@@ -63,13 +63,13 @@ lda_suffstats* new_lda_suffstats(lda_model* model)
     int num_terms = model->num_terms;
     int i,j;
 
-    lda_suffstats* ss = malloc(sizeof(lda_suffstats));
-    ss->class_total = malloc(sizeof(double)*num_topics);
-    ss->class_word = malloc(sizeof(double*)*num_topics);
+    lda_suffstats* ss = new lda_suffstats;
+    ss->class_total = new double[num_topics];
+    ss->class_word = new double* [num_topics];
     for (i = 0; i < num_topics; i++)
     {
 	ss->class_total[i] = 0;
-	ss->class_word[i] = malloc(sizeof(double)*num_terms);
+	ss->class_word[i] = new double[num_terms];
 	for (j = 0; j < num_terms; j++)
 	{
 	    ss->class_word[i][j] = 0;
@@ -152,14 +152,14 @@ lda_model* new_lda_model(int num_terms, int num_topics)
     int i,j;
     lda_model* model;
 
-    model = malloc(sizeof(lda_model));
+    model = new lda_model;
     model->num_topics = num_topics;
     model->num_terms = num_terms;
     model->alpha = 1.0;
-    model->log_prob_w = malloc(sizeof(double*)*num_topics);
+    model->log_prob_w = new double* [num_topics];
     for (i = 0; i < num_topics; i++)
     {
-	model->log_prob_w[i] = malloc(sizeof(double)*num_terms);
+	model->log_prob_w[i] = new double[num_terms];
 	for (j = 0; j < num_terms; j++)
 	    model->log_prob_w[i][j] = 0;
     }
