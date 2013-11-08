@@ -18,7 +18,7 @@
 # USA
 
 .SUFFIXES: .c .u
-CC= gcc
+CC= g++
 CFLAGS= -O3 -Wall -g
 LDFLAGS= -lm
 
